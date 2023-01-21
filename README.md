@@ -5,6 +5,13 @@ Wireshark's Lua API definitions, in Sumneko's language server annotations format
 The current implementation is incomplete and might contain errors. The idea would be to use this as basis for an automated generation of the file.
 
 
+## How to use
+
+If you are using VSCode, simply download/copy-paste the contents of wireshark_lua_api.lua into your project. The Sumneko language server plugin must be installed (identifier: sumneko.lua).
+
+If you are using something else, I am sorry, I have only tested it with the method described above.
+
+
 ## References
 
 * Lua Wireshark API documentation https://wiki.wireshark.org/Lua
