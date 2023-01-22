@@ -2,7 +2,7 @@
 
 Wireshark's Lua API definitions, in Sumneko's language server annotations format (similar to EmmyLua). Might work with EmmyLua.
 
-The current implementation is incomplete and might contain errors. The idea would be to use this as basis for an automated generation of the file.
+The current implementation is incomplete and might contain errors. The idea would be to use this as baseline for an automated tool which would generate this file.
 
 
 ## How to use
@@ -60,18 +60,18 @@ If you are using something else, I am sorry, I have only tested it with the meth
 - [x] Wtap Functions For Handling Capture File Types
   - [x] Global Functions
 - [ ] Custom File Format Reading And Writing
-    - [ ] CaptureInfo
+    - [x] CaptureInfo
     - [ ] CaptureInfoConst
     - [ ] File
     - [ ] FileHandler
     - [ ] FrameInfo
     - [ ] FrameInfoConst
-    - [ ] Global Functions
+    - [x] Global Functions
 - [x] Directory Handling Functions
     - [x] Dir
-- [ ] Handling 64-bit Integers
-    - [ ] Int64
-    - [ ] UInt64
+- [x] Handling 64-bit Integers
+    - [x] Int64
+    - [x] UInt64
 - [x] Binary encode/decode support
   - [x] Struct
 - [x] PCRE2 Regular Expressions

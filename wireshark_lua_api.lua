@@ -3471,6 +3471,147 @@ function wtap_pcapng_file_type_subtype() end
 Custom File Format Reading And Writing
 ]]
 
+--[[
+A CaptureInfo object, passed into Lua as an argument by FileHandler callback function read_open(), read(), seek_read(), seq_read_close(), and read_close(). This object represents capture file data and meta-data (data about the capture file) being read into Wireshark/TShark.
+
+This object’s fields can be written-to by Lua during the read-based function callbacks. In other words, when the Lua plugin’s FileHandler.read_open() function is invoked, a CaptureInfo object will be passed in as one of the arguments, and its fields should be written to by your Lua code to tell Wireshark about the capture.
+
+Since: 1.11.3
+]]
+---@class CaptureInfo
+CaptureInfo = {}
+
+--[[
+Generates a string of debug info for the CaptureInfo
+]]
+---@return string # String of debug information
+function CaptureInfo:__tostring() end
+
+--[[
+Mode: Retrieve or assign.
+
+The packet encapsulation type for the whole file.
+
+See wtap_encaps in init.lua for available types. Set to wtap_encaps.PER_PACKET if packets can have different types, then later set FrameInfo.encap for each packet during read()/seek_read()
+]]
+---@type WtapEncapsEnum
+CaptureInfo.encap = nil
+
+--[[
+Mode: Retrieve or assign.
+
+The precision of the packet timestamps in the file.
+
+See wtap_file_tsprec in init.lua for available precisions.
+]]
+---@type WtapTsprecEnum
+CaptureInfo.time_precision = nil
+
+--[[
+Mode: Retrieve or assign.
+
+The maximum packet length that could be recorded.
+
+Setting it to 0 means unknown.
+]]
+---@type integer
+CaptureInfo.snapshot_length = 0
+
+--[[
+Mode: Retrieve or assign.
+
+A string comment for the whole capture file, or nil if there is no comment
+]]
+---@type string|nil
+CaptureInfo.comment = ""
+
+--[[
+Mode: Retrieve or assign.
+
+A string containing the description of the hardware used to create the capture, or nil if there is no hardware string
+]]
+---@type string|nil
+CaptureInfo.hardware = ""
+
+--[[
+Mode: Retrieve or assign.
+
+A string containing the name of the operating system used to create the capture, or nil if there is no os string
+]]
+---@type string|nil
+CaptureInfo.os = ""
+
+--[[
+Mode: Retrieve or assign.
+
+A string containing the name of the application used to create the capture, or nil if there is no user_app string
+]]
+---@type string|nil
+CaptureInfo.user_app = ""
+
+--[[
+Mode: Assign only.
+
+Sets resolved ip-to-hostname information.
+
+The value set must be a Lua table of two key-ed names: ipv4_addresses and ipv6_addresses. The value of each of these names are themselves array tables, of key-ed tables, such that the inner table has a key addr set to the raw 4-byte or 16-byte IP address Lua string and a name set to the resolved name.
+
+For example, if the capture file identifies one resolved IPv4 address of 1.2.3.4 to foo.com, then you must set CaptureInfo.hosts to a table of:
+
+```lua
+{ ipv4_addresses = { { addr = "\01\02\03\04", name = "foo.com" } } }
+```
+
+Note that either the ipv4_addresses or the ipv6_addresses table, or both, may be empty or nil
+]]
+---@type table
+CaptureInfo.hosts = {}
+
+--[[
+Mode: Retrieve or assign.
+
+A private Lua value unique to this file.
+
+The private_table is a field you set/get with your own Lua table. This is provided so that a Lua script can save per-file reading/writing state, because multiple files can be opened and read at the same time.
+
+For example, if the user issued a reload-file command, or Lua called the reload() function, then the current capture file is still open while a new one is being opened, and thus Wireshark will invoke read_open() while the previous capture file has not caused read_close() to be called; and if the read_open() succeeds then read_close() will be called right after that for the previous file, rather than the one just opened. Thus the Lua script can use this private_table to store a table of values specific to each file, by setting this private_table in the read_open() function, which it can then later get back inside its read(), seek_read(), and read_close() functions.
+]]
+---@type table
+CaptureInfo.private_table = {}
+
+
+---@class CaptureInfoConst
+CaptureInfoConst = {}
+
+
+---@class File
+File = {}
+
+
+---@class FileHandler
+FileHandler = {}
+
+
+---@class FrameInfo
+FrameInfo = {}
+
+
+---@class FrameInfoConst
+FrameInfoConst = {}
+
+
+--[[
+Register the FileHandler into Wireshark/TShark, so they can read/write this new format. All functions and settings must be complete before calling this registration function. This function cannot be called inside the reading/writing callback functions
+]]
+---@param filehandler FileHandler The FileHandler object to be registered
+---@return integer # the new type number for this file reader/write
+function register_filehandler(filehandler) end
+
+--[[
+Deregister the FileHandler from Wireshark/TShark, so it no longer gets used for reading/writing/display. This function cannot be called inside the reading/writing callback functions
+]]
+---@param filehandler FileHandler The FileHandler object to be deregistered
+function deregister_filehandler(filehandler) end
 
 
 --[[------------------------------------------------------------------------
@@ -3651,68 +3792,270 @@ local masked = mynum:band(0xFFFFFFFF00000000)
 ---@class Int64
 Int64 = {}
 
+--[[
+Decodes an 8-byte Lua string, using the given endianness, into a new Int64 object.
+
+Since: 1.11.3
+]]
+---@param string string The Lua string containing a binary 64-bit integer
+---@param endian? boolean If set to true then little-endian is used, if false then big-endian; if missing or nil, native host endian.
+---@return Int64|nil # The Int64 object created, or nil on failure
 function Int64.decode(string, endian) end
 
+--[[
+Creates a Int64 Object.
+
+Since: 1.11.3
+]]
+---@param value? number|Int64|UInt64|string A number, UInt64, Int64, or string of ASCII digits to assign the value of the new Int64. Default is 0.
+---@param highvalue? number If this is a number and the first argument was a number, then the first will be treated as a lower 32 bits, and this is the high-order 32 bit number.
+---@return Int64 # The new Int64 object.
 function Int64.new(value, highvalue) end
 
+--[[
+Creates an Int64 of the maximum possible positive value. In other words, this should return an Int64 object of the number 9,223,372,036,854,775,807.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64 object of the maximum value.
 function Int64.max() end
 
+--[[
+Creates an Int64 of the minimum possible negative value. In other words, this should return an Int64 object of the number -9,223,372,036,854,775,808.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64 object of the minimum value.
 function Int64.min() end
 
+--[[
+Creates an Int64 object from the given hexadecimal string.
+
+Since: 1.11.3
+]]
+---@param hex string The hex-ASCII Lua string
+---@return Int64 # The new Int64 object.
 function Int64.fromhex(hex) end
 
+--[[
+Encodes the Int64 number into an 8-byte Lua string using the given endianness.
+
+Since: 1.11.3
+]]
+---@param endian boolean? If set to true then little-endian is used, if false then big-endian; if missing or nil, native host endian
+---@return string # The Lua string
 function Int64:encode(endian) end
 
+--[[
+Creates a Int64 object.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64 object.
 function Int64:__call() end
 
+--[[
+Returns a Lua number of the Int64 value. Note that this may lose precision.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number
 function Int64:tonumber() end
 
+--[[
+Returns a hexadecimal string of the Int64 value.
+
+Since: 1.11.3
+]]
+---@param numbytes integer The number of hex chars/nibbles to generate. A negative value generates uppercase. Default is 16.
+---@return string # The string hex.
 function Int64:tohex(numbytes) end
 
+--[[
+Returns a Lua number of the higher 32 bits of the Int64 value. A negative Int64 will return a negative Lua number.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number
 function Int64:higher() end
 
+--[[
+Returns a Lua number of the lower 32 bits of the Int64 value. This will always be positive.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number
 function Int64:lower() end
 
+--[[
+Converts the Int64 into a string of decimal digits
+]]
+---@return string # The Lua string
 function Int64:__tostring() end
 
+--[[
+Returns the negative of the Int64 as a new Int64.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__unm() end
 
+--[[
+Adds two Int64 together and returns a new one. The value may wrapped.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__add() end
 
+--[[
+Subtracts two Int64 and returns a new one. The value may wrapped.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__sub() end
 
+--[[
+Multiplies two Int64 and returns a new one. The value may truncated.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__mul() end
 
+--[[
+Divides two Int64 and returns a new one. Integer divide, no remainder. Trying to divide by zero results in a Lua error.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__div() end
 
+--[[
+Divides two Int64 and returns a new one of the remainder. Trying to modulo by zero results in a Lua error.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__mod() end
 
+--[[
+The first Int64 is taken to the power of the second Int64, returning a new one. This may truncate the value.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:__pow() end
 
+--[[
+Returns true if both Int64 are equal.
+
+Since: 1.11.3
+]]
+---@return boolean
 function Int64:__eq() end
 
+--[[
+Returns true if first Int64 is less than the second.
+
+Since: 1.11.3
+]]
+---@return boolean
 function Int64:__lt() end
 
+--[[
+Returns true if the first Int64 is less than or equal to the second.
+
+Since: 1.11.3
+]]
+---@return boolean
 function Int64:__le() end
 
+--[[
+Returns a Int64 of the bitwise 'not' operation.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:bnot() end
 
+--[[
+Returns a Int64 of the bitwise 'and' operation with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:band() end
 
+--[[
+Returns a Int64 of the bitwise 'or' operation, with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:bor() end
 
+--[[
+Returns a Int64 of the bitwise 'xor' operation, with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:bxor() end
 
+--[[
+Returns a Int64 of the bitwise logical left-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to left-shift by
+---@return Int64 # The new Int64.
 function Int64:lshift(numbits) end
 
+--[[
+Returns a Int64 of the bitwise logical right-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to right-shift by
+---@return Int64 # The new Int64.
 function Int64:rshift(numbits) end
 
+--[[
+Returns a Int64 of the bitwise arithmetic right-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to right-shift by
+---@return Int64 # The new Int64.
 function Int64:arshift(numbits) end
 
+--[[
+Returns a Int64 of the bitwise left rotation operation, by the given number of bits (up to 63).
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to roll left by
+---@return Int64 # The new Int64.
 function Int64:rol(numbits) end
 
+--[[
+Returns a Int64 of the bitwise right rotation operation, by the given number of bits (up to 63).
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to roll right by
+---@return Int64 # The new Int64.
 function Int64:ror(numbits) end
 
+--[[
+Returns a Int64 of the bytes swapped. This can be used to convert little-endian 64-bit numbers to big-endian 64 bit numbers or vice versa.
+
+Since: 1.11.3
+]]
+---@return Int64 # The new Int64.
 function Int64:bswap() end
 
 --[[
@@ -3758,68 +4101,271 @@ local masked = mynum:band(0xFFFFFFFF00000000)
 ---@class UInt64
 UInt64 = {}
 
+
+--[[
+Decodes an 8-byte Lua binary string, using given endianness, into a new UInt64 object.
+
+Since: 1.11.3
+]]
+---@param string string The Lua string containing a binary 64-bit integer
+---@param endian? boolean If set to true then little-endian is used, if false then big-endian; if missing or nil, native host endian.
+---@return UInt64|nil # The UInt64 object created, or nil on failure
 function UInt64.decode(string, endian) end
 
+--[[
+Creates a UInt64 Object.
+
+Since: 1.11.3
+]]
+---@param value? number|Int64|UInt64|string A number, UInt64, Int64, or string of digits to assign the value of the new UInt64. Default is 0.
+---@param highvalue? number If this is a number and the first argument was a number, then the first will be treated as a lower 32 bits, and this is the high-order 32-bit number.
+---@return UInt64 # The new UInt64 object.
 function UInt64.new(value, highvalue) end
 
+--[[
+Creates a UInt64 of the maximum possible value. In other words, this should return an UInt64 object of the number 18,446,744,073,709,551,615.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64 object of the maximum value.
 function UInt64.max() end
 
+--[[
+Creates a UInt64 of the minimum possible value. In other words, this should return an UInt64 object of the number 0.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64 object of the minimum value.
 function UInt64.min() end
 
+--[[
+Creates a UInt64 object from the given hex string.
+
+Since: 1.11.3
+]]
+---@param hex string The hex-ASCII Lua string
+---@return UInt64 # The new UInt64 object.
 function UInt64.fromhex(hex) end
 
+--[[
+Encodes the UInt64 number into an 8-byte Lua binary string, using given endianness.
+
+Since: 1.11.3
+]]
+---@param endian boolean? If set to true then little-endian is used, if false then big-endian; if missing or nil, native host endian
+---@return string # The Lua binary string
 function UInt64:encode(endian) end
 
+--[[
+Creates a UInt64 object.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64 object.
 function UInt64:__call() end
 
+--[[
+Returns a Lua number of the UInt64 value. This may lose precision.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number
 function UInt64:tonumber() end
 
+--[[
+Converts the UInt64 into a string
+]]
+---@return string # The Lua string
 function UInt64:__tostring() end
 
+--[[
+Returns a hex string of the UInt64 value.
+
+Since: 1.11.3
+]]
+---@param numbytes integer The number of hex-chars/nibbles to generate. Negative means uppercase Default is 16.
+---@return string # The string hex.
 function UInt64:tohex(numbytes) end
 
+--[[
+Returns a Lua number of the higher 32 bits of the UInt64 value.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number.
 function UInt64:higher() end
 
+--[[
+Returns a Lua number of the lower 32 bits of the UInt64 value.
+
+Since: 1.11.3
+]]
+---@return number # The Lua number
 function UInt64:lower() end
 
+--[[
+Returns the UInt64 in a new UInt64, since unsigned integers can’t be negated.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The UInt64 object.
 function UInt64:__unm() end
 
+--[[
+Adds two UInt64 together and returns a new one. This may wrap the value.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__add() end
 
+--[[
+Subtracts two UInt64 and returns a new one. This may wrap the value.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__sub() end
 
+--[[
+Multiplies two UInt64 and returns a new one. This may truncate the value.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__mul() end
 
+--[[
+Divides two Int64 and returns a new one. Integer divide, no remainder. Trying to divide by zero results in a Lua error.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__div() end
 
+--[[
+Divides two UInt64 and returns a new one of the remainder. Trying to modulo by zero results in a Lua error.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__mod() end
 
+--[[
+The first UInt64 is taken to the power of the second UInt64/number, returning a new one. This may truncate the value.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:__pow() end
 
+--[[
+Returns true if both UInt64 are equal.
+
+Since: 1.11.3
+]]
+---@return boolean
 function UInt64:__eq() end
 
+--[[
+Returns true if first UInt64 is less than the second.
+
+Since: 1.11.3
+]]
+---@return boolean
 function UInt64:__lt() end
 
+--[[
+Returns true if first UInt64 is less than or equal to the second.
+
+Since: 1.11.3
+]]
+---@return boolean
 function UInt64:__le() end
 
+--[[
+Returns a UInt64 of the bitwise 'not' operation.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:bnot() end
 
+--[[
+Returns a UInt64 of the bitwise 'and' operation, with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:band() end
 
+--[[
+Returns a UInt64 of the bitwise 'or' operation, with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:bor() end
 
+--[[
+Returns a UInt64 of the bitwise 'xor' operation, with the given number/Int64/UInt64. Note that multiple arguments are allowed.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:bxor() end
 
+--[[
+Returns a UInt64 of the bitwise logical left-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to left-shift by
+---@return UInt64 # The new UInt64.
 function UInt64:lshift(numbits) end
 
+--[[
+Returns a UInt64 of the bitwise logical right-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to right-shift by
+---@return UInt64 # The new UInt64.
 function UInt64:rshift(numbits) end
 
+--[[
+Returns a UInt64 of the bitwise arithmetic right-shift operation, by the given number of bits.
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to right-shift by
+---@return UInt64 # The new UInt64.
 function UInt64:arshift(numbits) end
 
+--[[
+Returns a UInt64 of the bitwise left rotation operation, by the given number of bits (up to 63).
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to roll left by
+---@return UInt64 # The new UInt64.
 function UInt64:rol(numbits) end
 
+--[[
+Returns a UInt64 of the bitwise right rotation operation, by the given number of bits (up to 63).
+
+Since: 1.11.3
+]]
+---@param numbits integer The number of bits to roll right by
+---@return UInt64 # The new UInt64.
 function UInt64:ror(numbits) end
 
+--[[
+Returns a UInt64 of the bytes swapped. This can be used to convert little-endian 64-bit numbers to big-endian 64 bit numbers or vice versa.
+
+Since: 1.11.3
+]]
+---@return UInt64 # The new UInt64.
 function UInt64:bswap() end
 
 
