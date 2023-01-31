@@ -717,6 +717,7 @@ Functions For New Protocols And Dissectors
 A refererence to a dissector, used to call a dissector against a packet or a part of it.
 ]]
 ---@class Dissector
+---@operator call():nil
 Dissector = {}
 
 --[[
@@ -1013,6 +1014,7 @@ function Prefs:__index(name) end
 A new protocol in Wireshark. Protocols have several uses. The main one is to dissect a protocol, but they can also be dummies used to register preferences for other purposes.
 ]]
 ---@class Proto
+---@operator call(): Proto
 Proto = {}
 
 --[[
@@ -1062,8 +1064,8 @@ A Tvb object
 A Pinfo object
 A TreeItem object
 ]]
----@type Dissector
-Proto.dissector = Dissector()
+---@type Dissector|fun(tvb: Tvb, pinfo: PInfo, tree: TreeItem)
+Proto.dissector = nil
 
 --[[
 Mode: Retrieve only.
@@ -1535,6 +1537,7 @@ A Field extractor to obtain field values. A Field object can only be created out
 Once created, it is used inside the callback functions, to generate a FieldInfo object.
 ]]
 ---@class Field
+---@operator call(): any[]
 Field = {}
 
 --[[
@@ -1609,6 +1612,9 @@ An extracted Field from dissected packet data. A FieldInfo object can only be us
 A FieldInfo can be called on either existing Wireshark fields by using either Field.new() or Field() before-hand, or it can be called on new fields created by Lua from a ProtoField.
 ]]
 ---@class FieldInfo
+---@operator len(): integer
+---@operator unm(): integer
+---@operator call(): any
 FieldInfo = {}
 
 --[[
@@ -1721,7 +1727,7 @@ The source Tvb object the FieldInfo is derived from, or nil if there is none.
 Since: 1.99.8
 ]]
 ---@type Tvb?
-FieldInfo.source = Tvb()
+FieldInfo.source = nil
 
 --[[
 Mode: Retrieve only.
@@ -1974,6 +1980,10 @@ function Columns:__index() end
 NSTime represents a nstime_t. This is an object with seconds and nanoseconds.
 ]]
 ---@class NSTime
+---@operator call(): NSTime
+---@operator add(NSTime): NSTime
+---@operator sub(NSTime): NSTime
+---@operator unm(): NSTime
 NSTime = {}
 
 --[[
@@ -2339,6 +2349,7 @@ Functions For Handling Packet Data
 ]]
 
 ---@class ByteArray
+---@operator concat(ByteArray): ByteArray
 ByteArray = {}
 
 --[[
@@ -2593,6 +2604,7 @@ A Tvb represents the packet's buffer. It is passed as an argument to listeners a
 To create a TvbRange the Tvb must be called with offset and length as optional arguments; the offset defaults to 0 and the length to tvb:captured_len().
 ]]
 ---@class Tvb
+---@operator call(): TvbRange
 Tvb = {}
 
 --[[
@@ -3622,6 +3634,7 @@ Directory Handling Functions
 A Directory object, as well as associated functions.
 ]]
 ---@class Dir
+---@operator call(): unknown
 Dir = {}
 
 --[[
@@ -3790,6 +3803,14 @@ local masked = mynum:band(0xFFFFFFFF00000000)
 ```
 ]]
 ---@class Int64
+---@operator call(): Int64
+---@operator add(Int64): Int64
+---@operator sub(Int64): Int64
+---@operator mul(Int64): Int64
+---@operator div(Int64): Int64
+---@operator pow(Int64): Int64
+---@operator mod(Int64): Int64
+---@operator unm(): Int64
 Int64 = {}
 
 --[[
@@ -4099,6 +4120,14 @@ local masked = mynum:band(0xFFFFFFFF00000000)
 ```
 ]]
 ---@class UInt64
+---@operator call(): UInt64
+---@operator add(UInt64): UInt64
+---@operator sub(UInt64): UInt64
+---@operator mul(UInt64): UInt64
+---@operator div(UInt64): UInt64
+---@operator pow(UInt64): UInt64
+---@operator mod(UInt64): UInt64
+---@operator unm(): UInt64
 UInt64 = {}
 
 
