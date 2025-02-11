@@ -4,44 +4,43 @@ Base Wireshark proto definitions.
 Annotations are EmmyLua format, as used by the Sumneko VSCode extension.
 ]]
 
-
 ---@enum FtypesEnum
 --NOTE[javi]: Not real values of enum
 ftypes = {
-    BOOLEAN = 0,
-    CHAR = 0,
-    UINT8 = 0,
-    UINT16 = 0,
-    UINT24 = 0,
-    UINT32 = 0,
-    UINT64 = 0,
-    INT8 = 0,
-    INT16 = 0,
-    INT24 = 0,
-    INT32 = 0,
-    INT64 = 0,
-    FLOAT = 0,
-    DOUBLE = 0 ,
-    ABSOLUTE_TIME = 0,
-    RELATIVE_TIME = 0,
-    STRING = 0,
-    STRINGZ = 0,
-    UINT_STRING = 0,
-    ETHER = 0,
-    BYTES = 0,
-    UINT_BYTES = 0,
-    IPv4 = 0,
-    IPv6 = 0,
-    IPXNET = 0,
-    FRAMENUM = 0,
-    PCRE = 0,
-    GUID = 0,
-    OID = 0,
-    PROTOCOL = 0,
-    REL_OID = 0,
-    SYSTEM_ID = 0,
-    EUI64 = 0,
-    NONE = 0,
+	BOOLEAN = 0,
+	CHAR = 0,
+	UINT8 = 0,
+	UINT16 = 0,
+	UINT24 = 0,
+	UINT32 = 0,
+	UINT64 = 0,
+	INT8 = 0,
+	INT16 = 0,
+	INT24 = 0,
+	INT32 = 0,
+	INT64 = 0,
+	FLOAT = 0,
+	DOUBLE = 0,
+	ABSOLUTE_TIME = 0,
+	RELATIVE_TIME = 0,
+	STRING = 0,
+	STRINGZ = 0,
+	UINT_STRING = 0,
+	ETHER = 0,
+	BYTES = 0,
+	UINT_BYTES = 0,
+	IPv4 = 0,
+	IPv6 = 0,
+	IPXNET = 0,
+	FRAMENUM = 0,
+	PCRE = 0,
+	GUID = 0,
+	OID = 0,
+	PROTOCOL = 0,
+	REL_OID = 0,
+	SYSTEM_ID = 0,
+	EUI64 = 0,
+	NONE = 0,
 }
 
 --NOTE[javi]: Not the actual values
@@ -77,366 +76,364 @@ MENU_STAT_RESPONSE = 0 -- superseded by MENU_STAT_RESPONSE_TIME
 ---@deprecated
 MENU_STAT_UNSORTED = 0 -- superseded by MENU_PACKET_STAT_UNSORTED
 
-
 ---@enum BaseEnum
 --NOTE[javi]: Not real values of enum
 base = {
-    NONE = 0,
-    DEC = 0,
-    HEX = 0,
-    OCT = 0,
-    DEC_HEX = 0,
-    HEX_DEC = 0,
-    UNIT_STRING = 0,
-    RANGE_STRING = 0,
-    LOCAL = 0,
-    UTC = 0,
-    DOY_UTC = 0,
-    ASCII = 0,
-    UNICODE = 0,
-    DOT = 0,
-    DASH = 0,
-    COLON = 0,
-    SPACE = 0,
+	NONE = 0,
+	DEC = 0,
+	HEX = 0,
+	OCT = 0,
+	DEC_HEX = 0,
+	HEX_DEC = 0,
+	UNIT_STRING = 0,
+	RANGE_STRING = 0,
+	LOCAL = 0,
+	UTC = 0,
+	DOY_UTC = 0,
+	ASCII = 0,
+	UNICODE = 0,
+	DOT = 0,
+	DASH = 0,
+	COLON = 0,
+	SPACE = 0,
 }
 
-
 expert = {
-    ---@enum ExpertGroupEnum
-    --NOTE[javi]: Not real values of enum
-    group = {
-        CHECKSUM = 0,
-        SEQUENCE = 0,
-        RESPONSE_CODE = 0,
-        REQUEST_CODE = 0,
-        UNDECODED = 0,
-        REASSEMBLE = 0,
-        MALFORMED = 0,
-        DEBUG = 0,
-        PROTOCOL = 0,
-        SECURITY = 0,
-        COMMENTS_GROUP = 0,
-        DECRYPTION = 0,
-        ASSUMPTION = 0,
-        DEPRECATED = 0,
-    },
-    ---@enum ExpertSeverityEnum
-    --NOTE[javi]: Not real values of enum
-    severity = {
-        COMMENT = 0,
-        CHAT = 0,
-        NOTE = 0,
-        WARN = 0,
-        ERROR = 0,
-    },
+	---@enum ExpertGroupEnum
+	--NOTE[javi]: Not real values of enum
+	group = {
+		CHECKSUM = 0,
+		SEQUENCE = 0,
+		RESPONSE_CODE = 0,
+		REQUEST_CODE = 0,
+		UNDECODED = 0,
+		REASSEMBLE = 0,
+		MALFORMED = 0,
+		DEBUG = 0,
+		PROTOCOL = 0,
+		SECURITY = 0,
+		COMMENTS_GROUP = 0,
+		DECRYPTION = 0,
+		ASSUMPTION = 0,
+		DEPRECATED = 0,
+	},
+	---@enum ExpertSeverityEnum
+	--NOTE[javi]: Not real values of enum
+	severity = {
+		COMMENT = 0,
+		CHAT = 0,
+		NOTE = 0,
+		WARN = 0,
+		ERROR = 0,
+	},
 }
 
 ---@enum FrameEnum
 --NOTE[javi]: Not real values of enum
 frametype = {
-    NONE = 0,
-    REQUEST = 0,
-    RESPONSE = 0,
-    ACK = 0,
-    DUP_ACK = 0,
+	NONE = 0,
+	REQUEST = 0,
+	RESPONSE = 0,
+	ACK = 0,
+	DUP_ACK = 0,
 }
 
 ---@enum EncodingEnum
 --NOTE[javi]: Not real values of enum
 encoding = {
-    ENC_ASCII = 0,
-    ENC_UTF_8 = 0,
-    ENC_UTF_16 = 0,
-    ENC_UCS_2 = 0,
-    ENC_UCS_4 = 0,
-    ENC_WINDOWS_1250 = 0,
-    ENC_WINDOWS_1251 = 0,
-    ENC_WINDOWS_1252 = 0,
-    ENC_ISO_646_BASIC = 0,
-    ENC_ISO_8859_1 = 0,
-    ENC_ISO_8859_2 = 0,
-    ENC_ISO_8859_3 = 0,
-    ENC_ISO_8859_4 = 0,
-    ENC_ISO_8859_5 = 0,
-    ENC_ISO_8859_6 = 0,
-    ENC_ISO_8859_7 = 0,
-    ENC_ISO_8859_8 = 0,
-    ENC_ISO_8859_9 = 0,
-    ENC_ISO_8859_10 = 0,
-    ENC_ISO_8859_11 = 0,
-    ENC_ISO_8859_13 = 0,
-    ENC_ISO_8859_14 = 0,
-    ENC_ISO_8859_15 = 0,
-    ENC_ISO_8859_16 = 0,
-    ENC_3GPP_TS_23_038_7BITS = 0,
-    ENC_3GPP_TS_23_038_7BITS_UNPACKED = 0,
-    ENC_ETSI_TS_102_221_ANNEX_A = 0,
-    ENC_EBCDIC = 0,
-    ENC_EBCDIC_CP037 = 0,
-    ENC_EBCDIC_CP500 = 0,
-    ENC_MAC_ROMAN = 0,
-    ENC_CP437 = 0,
-    ENC_CP855 = 0,
-    ENC_CP866 = 0,
-    ENC_ASCII_7BITS = 0,
-    ENC_T61 = 0,
-    ENC_BCD_DIGITS_0_9 = 0,
-    ENC_KEYPAD_ABC_TBCD = 0,
-    ENC_KEYPAD_BC_TBCD = 0,
-    ENC_GB18030 = 0,
-    ENC_EUC_KR = 0,
-    ENC_DECT_STANDARD_8BITS = 0,
-    ENC_DECT_STANDARD_4BITS_TBCD = 0,
+	ENC_ASCII = 0,
+	ENC_UTF_8 = 0,
+	ENC_UTF_16 = 0,
+	ENC_UCS_2 = 0,
+	ENC_UCS_4 = 0,
+	ENC_WINDOWS_1250 = 0,
+	ENC_WINDOWS_1251 = 0,
+	ENC_WINDOWS_1252 = 0,
+	ENC_ISO_646_BASIC = 0,
+	ENC_ISO_8859_1 = 0,
+	ENC_ISO_8859_2 = 0,
+	ENC_ISO_8859_3 = 0,
+	ENC_ISO_8859_4 = 0,
+	ENC_ISO_8859_5 = 0,
+	ENC_ISO_8859_6 = 0,
+	ENC_ISO_8859_7 = 0,
+	ENC_ISO_8859_8 = 0,
+	ENC_ISO_8859_9 = 0,
+	ENC_ISO_8859_10 = 0,
+	ENC_ISO_8859_11 = 0,
+	ENC_ISO_8859_13 = 0,
+	ENC_ISO_8859_14 = 0,
+	ENC_ISO_8859_15 = 0,
+	ENC_ISO_8859_16 = 0,
+	ENC_3GPP_TS_23_038_7BITS = 0,
+	ENC_3GPP_TS_23_038_7BITS_UNPACKED = 0,
+	ENC_ETSI_TS_102_221_ANNEX_A = 0,
+	ENC_EBCDIC = 0,
+	ENC_EBCDIC_CP037 = 0,
+	ENC_EBCDIC_CP500 = 0,
+	ENC_MAC_ROMAN = 0,
+	ENC_CP437 = 0,
+	ENC_CP855 = 0,
+	ENC_CP866 = 0,
+	ENC_ASCII_7BITS = 0,
+	ENC_T61 = 0,
+	ENC_BCD_DIGITS_0_9 = 0,
+	ENC_KEYPAD_ABC_TBCD = 0,
+	ENC_KEYPAD_BC_TBCD = 0,
+	ENC_GB18030 = 0,
+	ENC_EUC_KR = 0,
+	ENC_DECT_STANDARD_8BITS = 0,
+	ENC_DECT_STANDARD_4BITS_TBCD = 0,
 }
 
 ---@enum WtapEncapsEnum
 wtap_encaps = {
-	['3MB_ETHERNET']=184,
-	APPLE_IP_OVER_IEEE1394=62,
-	ARCNET_LINUX=9,
-	ARCNET=8,
-	ASCEND=16,
-	ATM_PDUS_UNTRUNCATED=14,
-	ATM_PDUS=13,
-	ATM_RFC1483=10,
-	ATSC_ALP=220,
-	AUERSWALD_LOG=219,
-	AUTOSAR_DLT=218,
-	AX25_KISS=147,
-	AX25=148,
-	BACNET_MS_TP_WITH_PHDR=143,
-	BACNET_MS_TP=63,
-	BER=90,
-	BLUETOOTH_BREDR_BB=160,
-	BLUETOOTH_H4_WITH_PHDR=99,
-	BLUETOOTH_H4=41,
-	BLUETOOTH_HCI=102,
-	BLUETOOTH_LE_LL_WITH_PHDR=161,
-	BLUETOOTH_LE_LL=154,
-	BLUETOOTH_LINUX_MONITOR=159,
-	CAN20B=109,
-	CATAPULT_DCT2000=89,
-	CHDLC_WITH_PHDR=40,
-	CHDLC=28,
-	CISCO_IOS=29,
-	COSINE=34,
-	DBUS=146,
-	DECT_NR=225,
-	DOCSIS=33,
-	DOCSIS31_XRA31=199,
-	DPAUXMON=200,
-	DPNSS=117,
-	DVBCI=132,
-	EBHSCR=204,
-	EMS=224,
-	ENC=38,
-	EPON=172,
-	ERF=98,
-	ERI_ENB_LOG=213,
-	ETHERNET_MPACKET=198,
-	ETHERNET=1,
-	ETW=212,
-	FDDI_BITSWAPPED=6,
-	FDDI=5,
-	FIBRE_CHANNEL_FC2_WITH_FRAME_DELIMS=122,
-	FIBRE_CHANNEL_FC2=121,
-	FIRA_UCI=221,
-	FLEXRAY=106,
-	FRELAY_WITH_PHDR=27,
-	FRELAY=26,
-	GCOM_SERIAL=78,
-	GCOM_TIE1=77,
-	GFP_F=179,
-	GFP_T=178,
-	GPRS_LLC=66,
-	GSM_UM=116,
-	HHDLC=32,
-	I2C_LINUX=112,
-	IEEE_802_11_AVS=24,
-	IEEE_802_11_NETMON=126,
-	IEEE_802_11_PRISM=21,
-	IEEE_802_11_RADIOTAP=23,
-	IEEE_802_11_WITH_RADIO=22,
-	IEEE_802_11=20,
-	IEEE802_15_4_NOFCS=127,
-	IEEE802_15_4_NONASK_PHY=113,
-	IEEE802_15_4_TAP=206,
-	IEEE802_15_4=104,
-	IEEE802_16_MAC_CPS=93,
-	INFINIBAND=150,
-	IP_OVER_FC=18,
-	IP_OVER_IB_PCAP=180,
-	IP_OVER_IB_SNOOP=137,
-	IPMB_KONTRON=103,
-	IPMI_TRACE=173,
-	IPNET=124,
-	IRDA=44,
-	ISDN=17,
-	ISO14443=177,
-	IXVERIWAVE=144,
-	JPEG_JFIF=123,
-	JSON=175,
-    JUNIPER_ATM1=67,
-	JUNIPER_ATM2=68,
-	JUNIPER_CHDLC=86,
-    JUNIPER_ETHER=83,
-	JUNIPER_FRELAY=85,
-	JUNIPER_GGSN=87,
-	JUNIPER_MLFR=82,
-	JUNIPER_MLPPP=81,
-	JUNIPER_PPP=84,
-	JUNIPER_PPPOE=76,
-	JUNIPER_ST=197,
-	JUNIPER_SVCS=151,
-	JUNIPER_VN=181,
-	JUNIPER_VP=91,
-	K12=80,
-	LAPB=12,
-	LAPD=131,
-	LAYER1_EVENT=110,
-	LIN=107,
-	LINUX_ATM_CLIP=11,
-	LINUX_LAPD=88,
-    LOCALTALK=30,
-	LOG_3GPP=207,
-	LOGCAT_BRIEF=164,
-	LOGCAT_LONG=170,
-	LOGCAT_PROCESS=165,
-	LOGCAT_TAG=166,
-	LOGCAT_THREAD=167,
-	LOGCAT_THREADTIME=169,
-	LOGCAT_TIME=168,
-	LOGCAT=163,
-	LOOP=174,
-	LORATAP=183,
-	MA_WFP_CAPTURE_2V4=193,
-	MA_WFP_CAPTURE_2V6=194,
-	MA_WFP_CAPTURE_AUTH_V4=195,
-	MA_WFP_CAPTURE_AUTH_V6=196,
-	MA_WFP_CAPTURE_V4=191,
-	MA_WFP_CAPTURE_V6=192,
-	MDB=223,
-	MIME=134,
-	MOST=108,
-	MP4=209,
-	MPEG_2_TS=138,
-	MPEG=96,
-	MTP2_WITH_PHDR=75,
-	MTP2=42,
-	MTP3=43,
-	MUX27010=133,
-	NETANALYZER_TRANSPARENT=136,
-	NETANALYZER=135,
-	NETLINK=158,
-	NETMON_HEADER=188,
-	NETMON_NET_FILTER=189,
-	NETMON_NET_NETEVENT=187,
-	NETMON_NETWORK_INFO_EX=190,
-	NETTL_ETHERNET=71,
-	NETTL_FDDI=73,
-	NETTL_RAW_ICMP=64,
-	NETTL_RAW_ICMPV6=65,
-	NETTL_RAW_IP=70,
-	NETTL_RAW_TELNET=94,
-	NETTL_TOKEN_RING=72,
-	NETTL_UNKNOWN=74,
-	NETTL_X25=79,
-	NFC_LLCP=140,
-	NFLOG=141,
-    NONE=-2,
-	NORDIC_BLE=186,
-	NSTRACE_1_0=119,
-	NSTRACE_2_0=120,
-	NSTRACE_3_0=162,
-	NSTRACE_3_5=176,
-	NULL=15,
-	OLD_PFLOG=31,
-	PACKETLOGGER=118,
-	PER_PACKET=-1,
-	PFLOG=39,
-	PKTAP=171,
-	PPI=97,
-	PPP_ETHER=139,
-	PPP_WITH_PHDR=19,
-	PPP=4,
-	RAW_IP=7,
-	RAW_IP4=129,
-	RAW_IP6=130,
-	RAW_IPFIX=128,
-	REDBACK=69,
-	RFC7468=202,
-	RTAC_SERIAL=153,
-	RUBY_MARSHAL=201,
-	SCCP=101,
-	SCTP=149,
-	SDH=145,
-	SDLC=36,
-	SILABS_DEBUG_CHANNEL=222,
-	SITA=100,
-	SLIP=3,
-	SLL=25,
-	SLL2=210,
-	SOCKETCAN=125,
-	STANAG_4607=156,
-	STANAG_5066_D_PDU=157,
-	SYMANTEC=61,
-	SYSTEMD_JOURNAL=203,
-	TNEF=114,
-	TOKEN_RING=2,
-	TZSP=37,
-	UNKNOWN=0,
-	USB_2_0_FULL_SPEED=216,
-	USB_2_0_HIGH_SPEED=217,
-	USB_2_0_LOW_SPEED=215,
-	USB_2_0=208,
-	USB_DARWIN=182,
-	USB_FREEBSD=92,
-	USB_LINUX_MMAPPED=115,
-	USB_LINUX=95,
-	USBPCAP=152,
-	USER0=45,
-	USER1=46,
-	USER10=55,
-	USER11=56,
-	USER12=57,
-	USER13=58,
-	USER14=59,
-	USER15=60,
-	USER2=47,
-	USER3=48,
-	USER4=49,
-	USER5=50,
-	USER6=51,
-	USER7=52,
-	USER8=53,
-	USER9=54,
-	V5_EF=142,
-	VPP=205,
-	VSOCK=185,
-	WFLEET_HDLC=35,
-	WIRESHARK_UPPER_PDU=155,
-	X2E_SERIAL=111,
-	X2E_XORAYA=105,
-	ZBNCP=214,
-	ZWAVE_SERIAL=211,
+	["3MB_ETHERNET"] = 184,
+	APPLE_IP_OVER_IEEE1394 = 62,
+	ARCNET_LINUX = 9,
+	ARCNET = 8,
+	ASCEND = 16,
+	ATM_PDUS_UNTRUNCATED = 14,
+	ATM_PDUS = 13,
+	ATM_RFC1483 = 10,
+	ATSC_ALP = 220,
+	AUERSWALD_LOG = 219,
+	AUTOSAR_DLT = 218,
+	AX25_KISS = 147,
+	AX25 = 148,
+	BACNET_MS_TP_WITH_PHDR = 143,
+	BACNET_MS_TP = 63,
+	BER = 90,
+	BLUETOOTH_BREDR_BB = 160,
+	BLUETOOTH_H4_WITH_PHDR = 99,
+	BLUETOOTH_H4 = 41,
+	BLUETOOTH_HCI = 102,
+	BLUETOOTH_LE_LL_WITH_PHDR = 161,
+	BLUETOOTH_LE_LL = 154,
+	BLUETOOTH_LINUX_MONITOR = 159,
+	CAN20B = 109,
+	CATAPULT_DCT2000 = 89,
+	CHDLC_WITH_PHDR = 40,
+	CHDLC = 28,
+	CISCO_IOS = 29,
+	COSINE = 34,
+	DBUS = 146,
+	DECT_NR = 225,
+	DOCSIS = 33,
+	DOCSIS31_XRA31 = 199,
+	DPAUXMON = 200,
+	DPNSS = 117,
+	DVBCI = 132,
+	EBHSCR = 204,
+	EMS = 224,
+	ENC = 38,
+	EPON = 172,
+	ERF = 98,
+	ERI_ENB_LOG = 213,
+	ETHERNET_MPACKET = 198,
+	ETHERNET = 1,
+	ETW = 212,
+	FDDI_BITSWAPPED = 6,
+	FDDI = 5,
+	FIBRE_CHANNEL_FC2_WITH_FRAME_DELIMS = 122,
+	FIBRE_CHANNEL_FC2 = 121,
+	FIRA_UCI = 221,
+	FLEXRAY = 106,
+	FRELAY_WITH_PHDR = 27,
+	FRELAY = 26,
+	GCOM_SERIAL = 78,
+	GCOM_TIE1 = 77,
+	GFP_F = 179,
+	GFP_T = 178,
+	GPRS_LLC = 66,
+	GSM_UM = 116,
+	HHDLC = 32,
+	I2C_LINUX = 112,
+	IEEE_802_11_AVS = 24,
+	IEEE_802_11_NETMON = 126,
+	IEEE_802_11_PRISM = 21,
+	IEEE_802_11_RADIOTAP = 23,
+	IEEE_802_11_WITH_RADIO = 22,
+	IEEE_802_11 = 20,
+	IEEE802_15_4_NOFCS = 127,
+	IEEE802_15_4_NONASK_PHY = 113,
+	IEEE802_15_4_TAP = 206,
+	IEEE802_15_4 = 104,
+	IEEE802_16_MAC_CPS = 93,
+	INFINIBAND = 150,
+	IP_OVER_FC = 18,
+	IP_OVER_IB_PCAP = 180,
+	IP_OVER_IB_SNOOP = 137,
+	IPMB_KONTRON = 103,
+	IPMI_TRACE = 173,
+	IPNET = 124,
+	IRDA = 44,
+	ISDN = 17,
+	ISO14443 = 177,
+	IXVERIWAVE = 144,
+	JPEG_JFIF = 123,
+	JSON = 175,
+	JUNIPER_ATM1 = 67,
+	JUNIPER_ATM2 = 68,
+	JUNIPER_CHDLC = 86,
+	JUNIPER_ETHER = 83,
+	JUNIPER_FRELAY = 85,
+	JUNIPER_GGSN = 87,
+	JUNIPER_MLFR = 82,
+	JUNIPER_MLPPP = 81,
+	JUNIPER_PPP = 84,
+	JUNIPER_PPPOE = 76,
+	JUNIPER_ST = 197,
+	JUNIPER_SVCS = 151,
+	JUNIPER_VN = 181,
+	JUNIPER_VP = 91,
+	K12 = 80,
+	LAPB = 12,
+	LAPD = 131,
+	LAYER1_EVENT = 110,
+	LIN = 107,
+	LINUX_ATM_CLIP = 11,
+	LINUX_LAPD = 88,
+	LOCALTALK = 30,
+	LOG_3GPP = 207,
+	LOGCAT_BRIEF = 164,
+	LOGCAT_LONG = 170,
+	LOGCAT_PROCESS = 165,
+	LOGCAT_TAG = 166,
+	LOGCAT_THREAD = 167,
+	LOGCAT_THREADTIME = 169,
+	LOGCAT_TIME = 168,
+	LOGCAT = 163,
+	LOOP = 174,
+	LORATAP = 183,
+	MA_WFP_CAPTURE_2V4 = 193,
+	MA_WFP_CAPTURE_2V6 = 194,
+	MA_WFP_CAPTURE_AUTH_V4 = 195,
+	MA_WFP_CAPTURE_AUTH_V6 = 196,
+	MA_WFP_CAPTURE_V4 = 191,
+	MA_WFP_CAPTURE_V6 = 192,
+	MDB = 223,
+	MIME = 134,
+	MOST = 108,
+	MP4 = 209,
+	MPEG_2_TS = 138,
+	MPEG = 96,
+	MTP2_WITH_PHDR = 75,
+	MTP2 = 42,
+	MTP3 = 43,
+	MUX27010 = 133,
+	NETANALYZER_TRANSPARENT = 136,
+	NETANALYZER = 135,
+	NETLINK = 158,
+	NETMON_HEADER = 188,
+	NETMON_NET_FILTER = 189,
+	NETMON_NET_NETEVENT = 187,
+	NETMON_NETWORK_INFO_EX = 190,
+	NETTL_ETHERNET = 71,
+	NETTL_FDDI = 73,
+	NETTL_RAW_ICMP = 64,
+	NETTL_RAW_ICMPV6 = 65,
+	NETTL_RAW_IP = 70,
+	NETTL_RAW_TELNET = 94,
+	NETTL_TOKEN_RING = 72,
+	NETTL_UNKNOWN = 74,
+	NETTL_X25 = 79,
+	NFC_LLCP = 140,
+	NFLOG = 141,
+	NONE = -2,
+	NORDIC_BLE = 186,
+	NSTRACE_1_0 = 119,
+	NSTRACE_2_0 = 120,
+	NSTRACE_3_0 = 162,
+	NSTRACE_3_5 = 176,
+	NULL = 15,
+	OLD_PFLOG = 31,
+	PACKETLOGGER = 118,
+	PER_PACKET = -1,
+	PFLOG = 39,
+	PKTAP = 171,
+	PPI = 97,
+	PPP_ETHER = 139,
+	PPP_WITH_PHDR = 19,
+	PPP = 4,
+	RAW_IP = 7,
+	RAW_IP4 = 129,
+	RAW_IP6 = 130,
+	RAW_IPFIX = 128,
+	REDBACK = 69,
+	RFC7468 = 202,
+	RTAC_SERIAL = 153,
+	RUBY_MARSHAL = 201,
+	SCCP = 101,
+	SCTP = 149,
+	SDH = 145,
+	SDLC = 36,
+	SILABS_DEBUG_CHANNEL = 222,
+	SITA = 100,
+	SLIP = 3,
+	SLL = 25,
+	SLL2 = 210,
+	SOCKETCAN = 125,
+	STANAG_4607 = 156,
+	STANAG_5066_D_PDU = 157,
+	SYMANTEC = 61,
+	SYSTEMD_JOURNAL = 203,
+	TNEF = 114,
+	TOKEN_RING = 2,
+	TZSP = 37,
+	UNKNOWN = 0,
+	USB_2_0_FULL_SPEED = 216,
+	USB_2_0_HIGH_SPEED = 217,
+	USB_2_0_LOW_SPEED = 215,
+	USB_2_0 = 208,
+	USB_DARWIN = 182,
+	USB_FREEBSD = 92,
+	USB_LINUX_MMAPPED = 115,
+	USB_LINUX = 95,
+	USBPCAP = 152,
+	USER0 = 45,
+	USER1 = 46,
+	USER10 = 55,
+	USER11 = 56,
+	USER12 = 57,
+	USER13 = 58,
+	USER14 = 59,
+	USER15 = 60,
+	USER2 = 47,
+	USER3 = 48,
+	USER4 = 49,
+	USER5 = 50,
+	USER6 = 51,
+	USER7 = 52,
+	USER8 = 53,
+	USER9 = 54,
+	V5_EF = 142,
+	VPP = 205,
+	VSOCK = 185,
+	WFLEET_HDLC = 35,
+	WIRESHARK_UPPER_PDU = 155,
+	X2E_SERIAL = 111,
+	X2E_XORAYA = 105,
+	ZBNCP = 214,
+	ZWAVE_SERIAL = 211,
 }
 
 ---@enum WtapTsprecEnum
 wtap_file_tsprec = {
-    ['10_MSEC']=2,
-    ['10_NSEC']=8,
-    ['10_USEC']=5, 
-    ['100_MSEC']=1,
-    ['100_NSEC']=7,
-    ['100_USEC']=4,
-    CSEC=2,
-    DSEC=1,
-    MSEC=3,
-    NSEC=9,
-    PER_PACKET=-1,
-    SEC=0,
-    UNKNOWN=-2,
-    USEC=6,
+	["10_MSEC"] = 2,
+	["10_NSEC"] = 8,
+	["10_USEC"] = 5,
+	["100_MSEC"] = 1,
+	["100_NSEC"] = 7,
+	["100_USEC"] = 4,
+	CSEC = 2,
+	DSEC = 1,
+	MSEC = 3,
+	NSEC = 9,
+	PER_PACKET = -1,
+	SEC = 0,
+	UNKNOWN = -2,
+	USEC = 6,
 }
 
 --[[------------------------------------------------------------------------
@@ -506,7 +503,6 @@ Reset a preference to default value. @since 3.5.0
 ---@return boolean result true if valid preference
 function reset_preference(preference) end
 
-
 --[[
 Write preferences to file and apply changes. @since 3.5.0
 ]]
@@ -517,7 +513,6 @@ Reports a failure to the user.
 ]]
 ---@param text string Message text to report.
 function report_failure(text) end
-
 
 --[[
 Loads a Lua file and compiles it into a Lua chunk, similar to the standard loadfile but searches additional directories. The search order is the current directory, followed by the user's personal configuration directory, and finally the global configuration directory.
@@ -550,8 +545,6 @@ Register a function to handle a -z option
 ---@param argument string The name of the option argument.
 ---@param action? fun() The function to be called when the command is invoked
 function register_stat_cmd_arg(argument, action) end
-
-
 
 --[[------------------------------------------------------------------------
 GUI Support
@@ -651,7 +644,6 @@ Errors:
 ]]
 ---@return string stopped A string specifying whether the Progress Dialog has stopped or not
 function ProgDlg:close() end
-
 
 --[[
 Creates and manages a text window. The text can be read-only or editable, and buttons can be added below the text
@@ -777,7 +769,6 @@ Errors:
 ---@param action fun() The Lua function to be called when the button is pressed
 ---@return TextWindow text_window The TextWindow object
 function TextWindow:add_button(label, action) end
-
 
 --[[
 Checks if we're running inside a GUI (i.e. Wireshark) or not
@@ -1005,7 +996,6 @@ It will be passed to the system's URL handler, which might execute malicious cod
 ---@return string filename The file name
 function browser_open_data_file(filename) end
 
-
 --[[------------------------------------------------------------------------
 Functions For New Protocols And Dissectors
 ]]
@@ -1056,7 +1046,6 @@ Gets the Dissector's description.
 ]]
 ---@return string description A string of the Dissector's description.
 function Dissector:__tostring() end
-
 
 --[[
 A table of subdissectors of a particular protocol (e.g. TCP subdissectors like http, smtp, sip are added to table "tcp.port").
@@ -1176,7 +1165,6 @@ Gets some debug information about the DissectorTable.
 ---@return string information A string of debug information about the DissectorTable.
 function DissectorTable:__tostring() end
 
-
 --[[
 A preference of a Proto.
 ]]
@@ -1272,7 +1260,6 @@ Creates a static text string to be added to a Proto.prefs Lua table
 ---@param descr string The static text description.
 function Pref.statictext(label, descr) end
 
-
 --[[
 The table of preferences of a protocol.
 ]]
@@ -1305,7 +1292,6 @@ Errors:
 ---@param name string The abbreviation of this preference
 ---@return any value The current value of the preference.
 function Prefs:__index(name) end
-
 
 --[[
 A new protocol in Wireshark. Protocols have several uses. The main one is to dissect a protocol, but they can also be dummies used to register preferences for other purposes.
@@ -1426,7 +1412,6 @@ Since: 1.11.3
 ---@type ProtoExpert[]
 Proto.experts = {}
 
-
 ---@class ProtoExpert
 ProtoExpert = {}
 
@@ -1449,7 +1434,6 @@ Since: 1.11.3
 ]]
 ---@return string
 function ProtoExpert:__tostring() end
-
 
 ---@class ProtoField
 ProtoField = {}
@@ -1800,7 +1784,6 @@ Returns a string with info about a protofield (for debugging purposes)
 ---@return string
 function ProtoField:__tostring() end
 
-
 --[[
 Make a Proto protocol (with a dissector function) a post-dissector. It will be called for every frame after dissection.
 ]]
@@ -1818,11 +1801,10 @@ Since: 1.99.2
 ---@param tvb Tvb The Tvb buffer to dissect PDUs from
 ---@param tree TreeItem
 ---@param min_header_size integer The number of bytes in the fixed-length part of the PDU.
----@param get_len_func fun(tvb: Tvb, pinfo: PInfo, offset: integer): integer A Lua function that will be called for each PDU, to determine the full length of the PDU. The called function will be given (1) the Tvb object of the whole Tvb (possibly reassembled), (2) the Pinfo object, and (3) an offset number of the index of the first byte of the PDU (i.e., its first header byte). The Lua function must return a Lua number of the full length of the PDU 
+---@param get_len_func fun(tvb: Tvb, pinfo: PInfo, offset: integer): integer A Lua function that will be called for each PDU, to determine the full length of the PDU. The called function will be given (1) the Tvb object of the whole Tvb (possibly reassembled), (2) the Pinfo object, and (3) an offset number of the index of the first byte of the PDU (i.e., its first header byte). The Lua function must return a Lua number of the full length of the PDU
 ---@param dissect_func fun(tvb: Tvb, pinfo: PInfo, tree: TreeItem): integer A Lua function that will be called for each PDU, to dissect the PDU. The called function will be given (1) the Tvb object of the PDU's Tvb (possibly reassembled), (2) the Pinfo object, and (3) the TreeItem object. The Lua function must return a Lua number of the number of bytes read/handled, which would typically be the Tvb:len().
 ---@param desegment boolean Whether to reassemble PDUs crossing TCP segment boundaries or not. (default=true)
 function dissect_tcp_pdus(tvb, tree, min_header_size, get_len_func, dissect_func, desegment) end
-
 
 --[[------------------------------------------------------------------------
 Obtaining Dissection Data
@@ -1901,7 +1883,6 @@ Since: 1.99.8
 ]]
 ---@type FtypesEnum
 Field.type = ftypes.NONE
-
 
 --[[
 An extracted Field from dissected packet data. A FieldInfo object can only be used within the callback functions of dissectors, post-dissectors, heuristic-dissectors, and taps.
@@ -2092,7 +2073,6 @@ Since: 1.99.8
 ---@type string
 FieldInfo.name = ""
 
-
 --[[
 Obtain all fields from the current tree. Note this only gets whatever fields the underlying dissectors have filled in for this packet at this time - there may be fields applicable to the packet that simply aren't being filled in because at this time they're not needed for anything. This function only gets what the C-side code has currently populated, not the full list.
 
@@ -2101,8 +2081,6 @@ Errors:
 ]]
 ---@return Field[]
 function all_field_infos() end
-
-
 
 --[[------------------------------------------------------------------------
 Obtaining Packet Information
@@ -2153,7 +2131,6 @@ Compares two Addresses.
 ]]
 function Address:__lt() end
 
-
 --[[
 A Column in the packet list.
 ]]
@@ -2199,7 +2176,6 @@ Clear Column text fence.
 Since: 1.11.3
 ]]
 function Column:clear_fence() end
-
 
 ---@class Columns
 Columns = {}
@@ -2271,7 +2247,6 @@ Get a specific Column.
 ]]
 ---@return Column column
 function Columns:__index() end
-
 
 --[[
 NSTime represents a nstime_t. This is an object with seconds and nanoseconds.
@@ -2355,7 +2330,6 @@ The NSTime nano seconds.
 ]]
 ---@type number
 NSTime.nsecs = 0
-
 
 --[[
 Packet information.
@@ -2627,7 +2601,6 @@ Sets the packet conversation to the given Proto object
 ---@type unknown
 PInfo.conversation = nil
 
-
 --[[
 PrivateTable represents the pinfo-->private_table.
 ]]
@@ -2639,7 +2612,6 @@ Gets debugging type information about the private table.
 ]]
 ---@return string str A string with all keys in the table, mostly for debugging.
 function PrivateTable:__tostring() end
-
 
 --[[------------------------------------------------------------------------
 Functions For Handling Packet Data
@@ -2894,7 +2866,6 @@ end
 ---@return Tvb tvb The created Tvb.
 function ByteArray:tvb(name) end
 
-
 --[[
 A Tvb represents the packet's buffer. It is passed as an argument to listeners and dissectors, and can be used to extract information (via TvbRange) from the packet's data.
 
@@ -2985,7 +2956,6 @@ Checks whether contents of two Tvbs are equal.
 Since: 1.99.8
 ]]
 function Tvb:__eq() end
-
 
 --[[
 A TvbRange represents a usable range of a Tvb and is used to extract data from the Tvb that generated it.
@@ -3230,8 +3200,6 @@ Converts the TvbRange into a string. The string can be truncated, so this is pri
 ]]
 ---@return string str A Lua hex string of the TvbRange truncated to 24 bytes.
 function TvbRange:__tostring() end
-
-
 
 --[[------------------------------------------------------------------------
 Adding Information To The Dissection Tree
@@ -3517,7 +3485,6 @@ Since: 1.99.8
 ---@type integer
 TreeItem.len = 0
 
-
 --[[------------------------------------------------------------------------
 Post-Dissection Packet Analysis
 ]]
@@ -3622,7 +3589,6 @@ function tap.reset() ... end
 ---@type fun()
 Listener.reset = nil
 
-
 --[[------------------------------------------------------------------------
 Saving Capture Files
 ]]
@@ -3677,7 +3643,6 @@ Errors:
 ]]
 function Dumper:dump_current() end
 
-
 --[[
 A pseudoheader to be used to save captured frames
 ]]
@@ -3718,7 +3683,6 @@ Creates an MTP2 PseudoHeader
 ---@param linknum? integer Link Number
 ---@return PseudoHeader # The MTP2 pseudoheader
 function PseudoHeader.mtp2(send, annexa, linknum) end
-
 
 --[[------------------------------------------------------------------------
 Wtap Functions For Handling Capture File Types
@@ -3774,7 +3738,6 @@ Since: 3.2.12, 3.4.4
 ]]
 ---@return integer # The filetype value for pcapng files.
 function wtap_pcapng_file_type_subtype() end
-
 
 --[[------------------------------------------------------------------------
 Custom File Format Reading And Writing
@@ -3888,26 +3851,20 @@ For example, if the user issued a reload-file command, or Lua called the reload(
 ---@type table
 CaptureInfo.private_table = {}
 
-
 ---@class CaptureInfoConst
 CaptureInfoConst = {}
-
 
 ---@class File
 File = {}
 
-
 ---@class FileHandler
 FileHandler = {}
-
 
 ---@class FrameInfo
 FrameInfo = {}
 
-
 ---@class FrameInfoConst
 FrameInfoConst = {}
-
 
 --[[
 Register the FileHandler into Wireshark/TShark, so they can read/write this new format. All functions and settings must be complete before calling this registration function. This function cannot be called inside the reading/writing callback functions
@@ -3921,7 +3878,6 @@ Deregister the FileHandler from Wireshark/TShark, so it no longer gets used for 
 ]]
 ---@param filehandler FileHandler The FileHandler object to be deregistered
 function deregister_filehandler(filehandler) end
-
 
 --[[------------------------------------------------------------------------
 Directory Handling Functions
@@ -4052,8 +4008,6 @@ function Dir:__call() end
 Closes the directory. Called automatically during garbage collection of a Dir object.
 ]]
 function Dir:close() end
-
-
 
 --[[------------------------------------------------------------------------
 Handling 64-bit Integers
@@ -4427,7 +4381,6 @@ local masked = mynum:band(0xFFFFFFFF00000000)
 ---@operator unm(): UInt64
 UInt64 = {}
 
-
 --[[
 Decodes an 8-byte Lua binary string, using given endianness, into a new UInt64 object.
 
@@ -4693,8 +4646,6 @@ Since: 1.11.3
 ]]
 ---@return UInt64 # The new UInt64.
 function UInt64:bswap() end
-
-
 
 --[[------------------------------------------------------------------------
 Binary encode/decode support
