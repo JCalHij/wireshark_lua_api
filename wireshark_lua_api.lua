@@ -3388,7 +3388,7 @@ Marks the TreeItem as a generated field (with data inferred but not contained in
 
 This used to return nothing, but as of 1.11.3 it returns the same tree item to allow chained calls
 ]]
----@param bool boolean A Lua boolean, which if true sets the TreeItem generated flag, else clears it (default=true)
+---@param bool? boolean A Lua boolean, which if true sets the TreeItem generated flag, else clears it (default=true)
 ---@return TreeItem tree_item The same TreeItem
 function TreeItem:set_generated(bool) end
 
