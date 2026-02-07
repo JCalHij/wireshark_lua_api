@@ -879,7 +879,7 @@ new_dialog(
 ]]
 ---@param title string The title of the dialog
 ---@param action fun() Action to be performed when the user presses OK.
----@param ... string Strings to be used as labels of the dialog's fields. Each string creates a new labeled field. The first field is required. Instead of a strings it is possible to provide tables with fields 'name' and 'value' of type string. Then the created dialog's field will labeld with the content of name and prefilled with the content of value.
+---@param ... string|table Strings to be used as labels of the dialog's fields. Each string creates a new labeled field. The first field is required. Instead of a strings it is possible to provide tables with fields 'name' and 'value' of type string. Then the created dialog's field will labeld with the content of name and prefilled with the content of value.
 function new_dialog(title, action, ...) end
 
 --[[
@@ -3388,7 +3388,7 @@ Marks the TreeItem as a generated field (with data inferred but not contained in
 
 This used to return nothing, but as of 1.11.3 it returns the same tree item to allow chained calls
 ]]
----@param bool boolean A Lua boolean, which if true sets the TreeItem generated flag, else clears it (default=true)
+---@param bool? boolean A Lua boolean, which if true sets the TreeItem generated flag, else clears it (default=true)
 ---@return TreeItem tree_item The same TreeItem
 function TreeItem:set_generated(bool) end
 
